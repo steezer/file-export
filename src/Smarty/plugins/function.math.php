@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  * This plugin is only for Smarty2 BC

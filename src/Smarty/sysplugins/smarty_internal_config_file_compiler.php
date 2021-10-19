@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Config File Compiler
  * This is the config file compiler class. It calls the lexer and parser to
@@ -112,7 +113,8 @@ class Smarty_Internal_Config_File_Compiler
             mb_internal_encoding($mbEncoding);
         }
 
-        $config->compiled_config = '<?php $_config_vars = ' . var_export($this->config_data, true) . '; ?>';
+        $config->compiled_config = '<?php
+ $_config_vars = ' . var_export($this->config_data, true) . '; ?>';
     }
 
     /**

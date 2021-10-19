@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  *
@@ -34,11 +35,11 @@ function smarty_modifiercompiler_escape($params, $compiler)
 
     try {
         $esc_type = smarty_literal_compiler_param($params, 1, 'html');
-        $char_set = smarty_literal_compiler_param($params, 2, Smarty::$_CHARSET);
+        $char_set = smarty_literal_compiler_param($params, 2, FileExport\Smarty\Smarty::$_CHARSET);
         $double_encode = smarty_literal_compiler_param($params, 3, true);
 
         if (!$char_set) {
-            $char_set = Smarty::$_CHARSET;
+            $char_set = FileExport\Smarty\Smarty::$_CHARSET;
         }
 
         switch ($esc_type) {
@@ -57,7 +58,7 @@ function smarty_modifiercompiler_escape($params, $compiler)
                 }
 
             case 'htmlall':
-                if (Smarty::$_MBSTRING) {
+                if (FileExport\Smarty\Smarty::$_MBSTRING) {
                     if ($_double_encode) {
                         // php >=5.2.3 - go native
                         return 'mb_convert_encoding(htmlspecialchars('

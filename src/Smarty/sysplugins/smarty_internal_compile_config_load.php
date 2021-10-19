@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Config Load
  * Compiles the {config load} tag
@@ -74,7 +75,8 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase
             }
         }
         // create config object
-        $_output = "<?php  \$_config = new Smarty_Internal_Config($conf_file, \$_smarty_tpl->smarty, \$_smarty_tpl);";
+        $_output = "<?php
+\$_config = new Smarty_Internal_Config($conf_file, \$_smarty_tpl->smarty, \$_smarty_tpl);";
         $_output .= "\$_config->loadConfigVars($section, '$scope'); ?>";
 
         return $_output;

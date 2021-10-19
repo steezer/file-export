@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 
 /**
  * Smarty Internal Plugin Compile extend

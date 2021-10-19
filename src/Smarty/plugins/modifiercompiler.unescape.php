@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  *
@@ -24,7 +25,7 @@ function smarty_modifiercompiler_unescape($params)
         $params[1] = 'html';
     }
     if (!isset($params[2])) {
-        $params[2] = '\'' . addslashes(Smarty::$_CHARSET) . '\'';
+        $params[2] = '\'' . addslashes(FileExport\Smarty\Smarty::$_CHARSET) . '\'';
     } else {
         $params[2] = "'" . $params[2] . "'";
     }
@@ -32,7 +33,7 @@ function smarty_modifiercompiler_unescape($params)
     switch (trim($params[1], '"\'')) {
         case 'entity':
         case 'htmlall':
-            if (Smarty::$_MBSTRING) {
+            if (FileExport\Smarty\Smarty::$_MBSTRING) {
                 return 'mb_convert_encoding(' . $params[0] . ', ' . $params[2] . ', \'HTML-ENTITIES\')';
             }
 

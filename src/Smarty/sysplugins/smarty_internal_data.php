@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Data
  * This file contains the basic classes and methods for template and variable creation
@@ -79,10 +80,10 @@ class Smarty_Internal_Data
     public function assignGlobal($varname, $value = null, $nocache = false)
     {
         if ($varname != '') {
-            Smarty::$global_tpl_vars[$varname] = new Smarty_variable($value, $nocache);
+            FileExport\Smarty\Smarty::$global_tpl_vars[$varname] = new Smarty_variable($value, $nocache);
             $ptr = $this;
             while ($ptr instanceof Smarty_Internal_Template) {
-                $ptr->tpl_vars[$varname] = clone Smarty::$global_tpl_vars[$varname];
+                $ptr->tpl_vars[$varname] = clone FileExport\Smarty\Smarty::$global_tpl_vars[$varname];
                 $ptr = $ptr->parent;
             }
         }
@@ -237,8 +238,8 @@ class Smarty_Internal_Data
                     $_ptr = null;
                 }
             }
-            if ($search_parents && isset(Smarty::$global_tpl_vars)) {
-                foreach (Smarty::$global_tpl_vars AS $key => $var) {
+            if ($search_parents && isset(FileExport\Smarty\Smarty::$global_tpl_vars)) {
+                foreach (FileExport\Smarty\Smarty::$global_tpl_vars AS $key => $var) {
                     if (!array_key_exists($key, $_result)) {
                         $_result[$key] = $var->value;
                     }
@@ -325,9 +326,9 @@ class Smarty_Internal_Data
                 $_ptr = null;
             }
         }
-        if (isset(Smarty::$global_tpl_vars[$variable])) {
+        if (isset(FileExport\Smarty\Smarty::$global_tpl_vars[$variable])) {
             // found it, return it
-            return Smarty::$global_tpl_vars[$variable];
+            return FileExport\Smarty\Smarty::$global_tpl_vars[$variable];
         }
         if ($this->smarty->error_unassigned && $error_enable) {
             // force a notice
@@ -512,7 +513,7 @@ class Smarty_Variable
      *
      * @var int
      */
-    public $scope = Smarty::SCOPE_LOCAL;
+    public $scope = FileExport\Smarty\Smarty::SCOPE_LOCAL;
 
     /**
      * create Smarty variable object
@@ -521,7 +522,7 @@ class Smarty_Variable
      * @param boolean $nocache if true any output of this variable will be not cached
      * @param int     $scope   the scope the variable will have  (local,parent or root)
      */
-    public function __construct($value = null, $nocache = false, $scope = Smarty::SCOPE_LOCAL)
+    public function __construct($value = null, $nocache = false, $scope = FileExport\Smarty\Smarty::SCOPE_LOCAL)
     {
         $this->value = $value;
         $this->nocache = $nocache;

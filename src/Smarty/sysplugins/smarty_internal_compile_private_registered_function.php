@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Registered Function
  * Compiles code for the execution of a registered function
@@ -44,10 +45,10 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
             $compiler->tag_nocache = true;
         }
         unset($_attr['nocache']);
-        if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag])) {
-            $tag_info = $compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag];
+        if (isset($compiler->smarty->registered_plugins[FileExport\Smarty\Smarty::PLUGIN_FUNCTION][$tag])) {
+            $tag_info = $compiler->smarty->registered_plugins[FileExport\Smarty\Smarty::PLUGIN_FUNCTION][$tag];
         } else {
-            $tag_info = $compiler->default_handler_plugins[Smarty::PLUGIN_FUNCTION][$tag];
+            $tag_info = $compiler->default_handler_plugins[FileExport\Smarty\Smarty::PLUGIN_FUNCTION][$tag];
         }
         // not cachable?
         $compiler->tag_nocache = $compiler->tag_nocache || !$tag_info[1];
@@ -67,11 +68,14 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
         $function = $tag_info[0];
         // compile code
         if (!is_array($function)) {
-            $output = "<?php echo {$function}({$_params},\$_smarty_tpl);?>\n";
+            $output = "<?php
+ echo {$function}({$_params},\$_smarty_tpl);?>\n";
         } elseif (is_object($function[0])) {
-            $output = "<?php echo \$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['{$tag}'][0][0]->{$function[1]}({$_params},\$_smarty_tpl);?>\n";
+            $output = "<?php
+ echo \$_smarty_tpl->smarty->registered_plugins[FileExport\Smarty\Smarty::PLUGIN_FUNCTION]['{$tag}'][0][0]->{$function[1]}({$_params},\$_smarty_tpl);?>\n";
         } else {
-            $output = "<?php echo {$function[0]}::{$function[1]}({$_params},\$_smarty_tpl);?>\n";
+            $output = "<?php
+ echo {$function[0]}::{$function[1]}({$_params},\$_smarty_tpl);?>\n";
         }
 
         return $output;

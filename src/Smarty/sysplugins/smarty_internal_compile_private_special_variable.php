@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Special Smarty Variable
  * Compiles the special $smarty variables
@@ -36,7 +37,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
             case 'section':
                 return "\$_smarty_tpl->getVariable('smarty')->value$parameter";
             case 'capture':
-                return "Smarty::\$_smarty_vars$parameter";
+                return "FileExport\Smarty\Smarty::\$_smarty_vars$parameter";
             case 'now':
                 return 'time()';
             case 'cookies':
@@ -70,7 +71,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 return 'dirname($_smarty_tpl->source->filepath)';
 
             case 'version':
-                $_version = Smarty::SMARTY_VERSION;
+                $_version = FileExport\Smarty\Smarty::SMARTY_VERSION;
 
                 return "'$_version'";
 

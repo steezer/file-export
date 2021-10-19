@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Smarty Template Compiler Base
  * This file contains the basic classes and methods for compiling Smarty templates with lexer/parser
@@ -12,6 +13,10 @@
  * @ignore
  */
 include 'smarty_internal_parsetree.php';
+include 'smarty_internal_templatecompilerbase.php';
+include 'smarty_internal_templatelexer.php';
+include 'smarty_internal_templateparser.php';
+include 'smarty_internal_compilebase.php';
 
 /**
  * Class SmartyTemplateCompiler

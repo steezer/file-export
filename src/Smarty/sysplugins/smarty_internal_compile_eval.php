@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Eval
  * Compiles the {eval} tag.
@@ -66,6 +67,7 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase
             $_output .= "echo \$_template->fetch();";
         }
 
-        return "<?php $_output ?>";
+        return "<?php
+$_output ?>";
     }
 }

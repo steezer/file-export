@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Nocache Insert
  * Compiles the {insert} tag into the cache file
@@ -29,7 +30,8 @@ class Smarty_Internal_Nocache_Insert
      */
     public static function compile($_function, $_attr, $_template, $_script, $_assign = null)
     {
-        $_output = '<?php ';
+        $_output = '<?php
+ ';
         if ($_script != 'null') {
             // script which must be included
             // code for script file loading

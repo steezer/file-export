@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  *
@@ -29,5 +30,5 @@ function smarty_modifiercompiler_strip($params)
         $params[1] = "' '";
     }
 
-    return "preg_replace('!\s+!" . Smarty::$_UTF8_MODIFIER . "', {$params[1]},{$params[0]})";
+    return "preg_replace('!\s+!" . FileExport\Smarty\Smarty::$_UTF8_MODIFIER . "', {$params[1]},{$params[0]})";
 }

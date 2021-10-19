@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Object Function
  * Compiles code for registered objects as function
@@ -74,9 +75,11 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
         if (empty($_assign)) {
             // This tag does create output
             $compiler->has_output = true;
-            $output = "<?php echo {$return};?>\n";
+            $output = "<?php
+ echo {$return};?>\n";
         } else {
-            $output = "<?php \$_smarty_tpl->assign({$_assign},{$return});?>\n";
+            $output = "<?php
+ \$_smarty_tpl->assign({$_assign},{$return});?>\n";
         }
 
         return $output;

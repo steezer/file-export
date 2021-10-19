@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  *
@@ -20,7 +21,7 @@
  */
 function smarty_modifiercompiler_to_charset($params)
 {
-    if (!Smarty::$_MBSTRING) {
+    if (!FileExport\Smarty\Smarty::$_MBSTRING) {
         // FIXME: (rodneyrehm) shouldn't this throw an error?
         return $params[0];
     }
@@ -29,5 +30,5 @@ function smarty_modifiercompiler_to_charset($params)
         $params[1] = '"ISO-8859-1"';
     }
 
-    return 'mb_convert_encoding(' . $params[0] . ', ' . $params[1] . ', "' . addslashes(Smarty::$_CHARSET) . '")';
+    return 'mb_convert_encoding(' . $params[0] . ', ' . $params[1] . ', "' . addslashes(FileExport\Smarty\Smarty::$_CHARSET) . '")';
 }

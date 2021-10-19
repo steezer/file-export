@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Project:     Smarty: the PHP compiling template engine
  * File:        smarty_internal_utility.php

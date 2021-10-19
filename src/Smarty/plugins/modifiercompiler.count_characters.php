@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  *
@@ -22,10 +23,10 @@
 function smarty_modifiercompiler_count_characters($params)
 {
     if (!isset($params[1]) || $params[1] != 'true') {
-        return 'preg_match_all(\'/[^\s]/' . Smarty::$_UTF8_MODIFIER . '\',' . $params[0] . ', $tmp)';
+        return 'preg_match_all(\'/[^\s]/' . FileExport\Smarty\Smarty::$_UTF8_MODIFIER . '\',' . $params[0] . ', $tmp)';
     }
-    if (Smarty::$_MBSTRING) {
-        return 'mb_strlen(' . $params[0] . ', \'' . addslashes(Smarty::$_CHARSET) . '\')';
+    if (FileExport\Smarty\Smarty::$_MBSTRING) {
+        return 'mb_strlen(' . $params[0] . ', \'' . addslashes(FileExport\Smarty\Smarty::$_CHARSET) . '\')';
     }
     // no MBString fallback
     return 'strlen(' . $params[0] . ')';

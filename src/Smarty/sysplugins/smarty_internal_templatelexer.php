@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Templatelexer
  * This is the lexer to break the template source into tokens
@@ -330,7 +331,8 @@ class Smarty_Internal_Templatelexer
     function yy_r1_14($yy_subpatterns)
     {
 
-        if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
+        if (in_array($this->value, Array('<?', '<?=', '<?php
+'))) {
             $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;
         } elseif ($this->value == '<?xml') {
             $this->token = Smarty_Internal_Templateparser::TP_XMLTAG;
@@ -1025,7 +1027,8 @@ class Smarty_Internal_Templatelexer
     function yy_r3_3($yy_subpatterns)
     {
 
-        if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
+        if (in_array($this->value, Array('<?', '<?=', '<?php
+'))) {
             $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;
         } else {
             $this->token = Smarty_Internal_Templateparser::TP_FAKEPHPSTARTTAG;

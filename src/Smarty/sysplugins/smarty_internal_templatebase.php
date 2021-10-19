@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Smarty Template  Base
  * This file contains the basic shared methods for template handling
@@ -73,8 +74,8 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data
                     $config_vars = array_merge($config_vars, $parent_ptr->config_vars);
                 }
             }
-            if (!empty(Smarty::$global_tpl_vars)) {
-                $tpl_vars = array_merge(Smarty::$global_tpl_vars, $tpl_vars);
+            if (!empty(FileExport\Smarty\Smarty::$global_tpl_vars)) {
+                $tpl_vars = array_merge(FileExport\Smarty\Smarty::$global_tpl_vars, $tpl_vars);
             }
             $_template->tpl_vars = $tpl_vars;
             $_template->config_vars = $config_vars;
@@ -129,7 +130,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data
             throw new SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'{$parent_resource}");
         }
         // read from cache or render
-        if (!($_template->caching == Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == Smarty::CACHING_LIFETIME_SAVED) || !$_template->cached->valid) {
+        if (!($_template->caching == FileExport\Smarty\Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == FileExport\Smarty\Smarty::CACHING_LIFETIME_SAVED) || !$_template->cached->valid) {
             // render template (not loaded and not in cache)
             if (!$_template->source->uncompiled) {
                 /** @var Smarty_Internal_Template $_smarty_tpl
@@ -232,7 +233,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data
                 Smarty_Internal_Debug::end_render($_template);
             }
             // write to cache when nessecary
-            if (!$_template->source->recompiled && ($_template->caching == Smarty::CACHING_LIFETIME_SAVED || $_template->caching == Smarty::CACHING_LIFETIME_CURRENT)) {
+            if (!$_template->source->recompiled && ($_template->caching == FileExport\Smarty\Smarty::CACHING_LIFETIME_SAVED || $_template->caching == FileExport\Smarty\Smarty::CACHING_LIFETIME_CURRENT)) {
                 if ($this->smarty->debugging) {
                     Smarty_Internal_Debug::start_cache($_template);
                 }
@@ -245,7 +246,8 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data
                 // loop over items, stitch back together
                 foreach ($cache_split as $curr_idx => $curr_split) {
                     // escape PHP tags in template content
-                    $output .= preg_replace('/(<%|%>|<\?php|<\?|\?>)/', "<?php echo '\$1'; ?>\n", $curr_split);
+                    $output .= preg_replace('/(<%|%>|<\?php|<\?|\?>)/', "<?php
+ echo '\$1'; ?>\n", $curr_split);
                     if (isset($cache_parts[0][$curr_idx])) {
                         $_template->properties['has_nocache_code'] = true;
                         // remove nocache tags from cache output

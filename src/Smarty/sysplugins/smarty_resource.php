@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Resource Plugin
  *
@@ -532,7 +533,7 @@ abstract class Smarty_Resource
      *
      * @return Smarty_Template_Source   Source Object
      */
-    public static function source(Smarty_Internal_Template $_template = null, Smarty $smarty = null, $template_resource = null)
+    public static function source(Smarty_Internal_Template $_template = null, $smarty = null, $template_resource = null)
     {
         if ($_template) {
             $smarty = $_template->smarty;
@@ -769,7 +770,7 @@ class Smarty_Template_Source
 
         $compiled = new Smarty_Template_Compiled($this);
         $this->handler->populateCompiledFilepath($compiled, $_template);
-        $compiled->timestamp = @filemtime($compiled->filepath);
+        $compiled->timestamp = is_file($compiled->filepath) ? @filemtime($compiled->filepath) : 0;
         $compiled->exists = !!$compiled->timestamp;
 
         // runtime cache

@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  *
@@ -10,7 +11,7 @@
 /*
  * FIXME: Smarty_Security API
  *      - getter and setter instead of public properties would allow cultivating an internal cache properly
- *      - current implementation of isTrustedResourceDir() assumes that Smarty::$template_dir and Smarty::$config_dir are immutable
+ *      - current implementation of isTrustedResourceDir() assumes that FileExport\Smarty\Smarty::$template_dir and FileExport\Smarty\Smarty::$config_dir are immutable
  *        the cache is killed every time either of the variables change. That means that two distinct Smarty objects with differing
  *        $template_dir or $config_dir should NOT share the same Smarty_Security instance,
  *        as this would lead to (severe) performance penalty! how should this be handled?
@@ -22,18 +23,18 @@
 class Smarty_Security
 {
     /**
-     * This determines how Smarty handles "<?php ... ?>" tags in templates.
+     * This determines how Smarty handles "<?php... ?>" tags in templates.
      * possible values:
      * <ul>
-     *   <li>Smarty::PHP_PASSTHRU -> echo PHP tags as they are</li>
-     *   <li>Smarty::PHP_QUOTE    -> escape tags as entities</li>
-     *   <li>Smarty::PHP_REMOVE   -> remove php tags</li>
-     *   <li>Smarty::PHP_ALLOW    -> execute php tags</li>
+     *   <li>FileExport\Smarty\Smarty::PHP_PASSTHRU -> echo PHP tags as they are</li>
+     *   <li>FileExport\Smarty\Smarty::PHP_QUOTE    -> escape tags as entities</li>
+     *   <li>FileExport\Smarty\Smarty::PHP_REMOVE   -> remove php tags</li>
+     *   <li>FileExport\Smarty\Smarty::PHP_ALLOW    -> execute php tags</li>
      * </ul>
      *
      * @var integer
      */
-    public $php_handling = Smarty::PHP_PASSTHRU;
+    public $php_handling = FileExport\Smarty\Smarty::PHP_PASSTHRU;
     /**
      * This is the list of template directories that are considered secure.
      * $template_dir is in this list implicitly.

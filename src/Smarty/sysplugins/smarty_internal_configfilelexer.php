@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Configfilelexer
  * This is the lexer to break the config file source into tokens

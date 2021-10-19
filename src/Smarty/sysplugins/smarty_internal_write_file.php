@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty write file plugin
  *
@@ -53,7 +54,7 @@ class Smarty_Internal_Write_File
          * currently reading that file to fail, but linux' rename()
          * seems to be smart enough to handle that for us.
          */
-        if (Smarty::$_IS_WINDOWS) {
+        if (FileExport\Smarty\Smarty::$_IS_WINDOWS) {
             // remove original file
             @unlink($_filepath);
             // rename tmp file

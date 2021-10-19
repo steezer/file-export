@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Include PHP
  * Compiles the {include_php} tag
@@ -99,9 +100,11 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
         }
 
         if (isset($_assign)) {
-            return "<?php ob_start(); include{$_once} ('{$_filepath}'); \$_smarty_tpl->assign({$_assign},ob_get_contents()); ob_end_clean();?>";
+            return "<?php
+ ob_start(); include{$_once} ('{$_filepath}'); \$_smarty_tpl->assign({$_assign},ob_get_contents()); ob_end_clean();?>";
         } else {
-            return "<?php include{$_once} ('{$_filepath}');?>\n";
+            return "<?php
+ include{$_once} ('{$_filepath}');?>\n";
         }
     }
 }

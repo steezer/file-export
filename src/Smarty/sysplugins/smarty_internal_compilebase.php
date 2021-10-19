@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin CompileBase
  *
@@ -7,6 +8,19 @@
  * @author     Uwe Tews
  */
 
+function func_new_each(&$array){
+    $res = array();
+    $key = key($array);
+    if($key !== null){
+        next($array);
+        $res[1] = $res['value'] = $array[$key];
+        $res[0] = $res['key'] = $key;
+    }else{
+        $res = false;
+    }
+    return $res;
+}
+ 
 /**
  * This class does extend all internal compile plugins
  *
@@ -72,7 +86,7 @@ abstract class Smarty_Internal_CompileBase
                 }
                 // named attribute
             } else {
-                $kv = each($mixed);
+                $kv = func_new_each($mixed);
                 // option flag?
                 if (in_array($kv['key'], $this->option_flags)) {
                     if (is_bool($kv['value'])) {

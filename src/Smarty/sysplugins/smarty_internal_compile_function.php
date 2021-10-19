@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Function
  * Compiles the {function} {/function} tags
@@ -76,7 +77,8 @@ class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase
         if ($compiler->template->caching) {
             $output = '';
         } else {
-            $output = "<?php if (!function_exists('smarty_template_function_{$_name}')) {
+            $output = "<?php
+ if (!function_exists('smarty_template_function_{$_name}')) {
     function smarty_template_function_{$_name}(\$_smarty_tpl,\$params) {
     \$saved_tpl_vars = \$_smarty_tpl->tpl_vars;
     foreach (\$_smarty_tpl->smarty->template_functions['{$_name}']['parameter'] as \$key => \$value) {\$_smarty_tpl->tpl_vars[\$key] = new Smarty_variable(\$value);};
@@ -118,7 +120,8 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase
         // build plugin include code
         $plugins_string = '';
         if (!empty($compiler->template->required_plugins['compiled'])) {
-            $plugins_string = '<?php ';
+            $plugins_string = '<?php
+ ';
             foreach ($compiler->template->required_plugins['compiled'] as $tmp) {
                 foreach ($tmp as $data) {
                     $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$data['file']}';\n";
@@ -127,7 +130,9 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase
             $plugins_string .= '?>';
         }
         if (!empty($compiler->template->required_plugins['nocache'])) {
-            $plugins_string .= "<?php echo '/*%%SmartyNocache:{$compiler->template->properties['nocache_hash']}%%*/<?php ";
+            $plugins_string .= "<?php
+ echo '/*%%SmartyNocache:{$compiler->template->properties['nocache_hash']}%%*/<?php
+ ";
             foreach ($compiler->template->required_plugins['nocache'] as $tmp) {
                 foreach ($tmp as $data) {
                     $plugins_string .= "if (!is_callable(\'{$data['function']}\')) include \'{$data['file']}\';\n";
@@ -152,8 +157,9 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase
             $compiler->has_code = false;
             $output = true;
         } else {
-            $output = $plugins_string . $compiler->parser->current_buffer->to_smarty_php() . "<?php \$_smarty_tpl->tpl_vars = \$saved_tpl_vars;
-foreach (Smarty::\$global_tpl_vars as \$key => \$value) if(!isset(\$_smarty_tpl->tpl_vars[\$key])) \$_smarty_tpl->tpl_vars[\$key] = \$value;}}?>\n";
+            $output = $plugins_string . $compiler->parser->current_buffer->to_smarty_php() . "<?php
+ \$_smarty_tpl->tpl_vars = \$saved_tpl_vars;
+foreach (FileExport\Smarty\Smarty::\$global_tpl_vars as \$key => \$value) if(!isset(\$_smarty_tpl->tpl_vars[\$key])) \$_smarty_tpl->tpl_vars[\$key] = \$value;}}?>\n";
         }
         // reset flag that we are compiling a template function
         $compiler->compiles_template_function = false;

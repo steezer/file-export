@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Debug
  * Class to collect data for the Smarty Debugging Consol
@@ -209,7 +210,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
             $tpl_vars = array_merge($parent->tpl_vars, $tpl_vars);
             $config_vars = array_merge($parent->config_vars, $config_vars);
         } else {
-            foreach (Smarty::$global_tpl_vars as $name => $var) {
+            foreach (FileExport\Smarty\Smarty::$global_tpl_vars as $name => $var) {
                 if (!array_key_exists($name, $tpl_vars)) {
                     $clone = clone $var;
                     $clone->scope = 'Global';

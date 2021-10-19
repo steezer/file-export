@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin Compile Continue
  * Compiles the {continue} tag
@@ -70,6 +71,7 @@ class Smarty_Internal_Compile_Continue extends Smarty_Internal_CompileBase
             $compiler->trigger_template_error("cannot continue {$_levels} level(s)", $compiler->lex->taglineno);
         }
 
-        return "<?php continue {$_levels}?>";
+        return "<?php
+    continue {$_levels}?>";
     }
 }

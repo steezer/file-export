@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty plugin
  *
@@ -32,7 +33,7 @@ function smarty_modifiercompiler_wordwrap($params, $compiler)
         $params[3] = 'false';
     }
     $function = 'wordwrap';
-    if (Smarty::$_MBSTRING) {
+    if (FileExport\Smarty\Smarty::$_MBSTRING) {
         if ($compiler->template->caching && ($compiler->tag_nocache | $compiler->nocache)) {
             $compiler->template->required_plugins['nocache']['wordwrap']['modifier']['file'] = SMARTY_PLUGINS_DIR . 'shared.mb_wordwrap.php';
             $compiler->template->required_plugins['nocache']['wordwrap']['modifier']['function'] = 'smarty_mb_wordwrap';

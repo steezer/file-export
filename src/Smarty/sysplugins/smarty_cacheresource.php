@@ -1,4 +1,5 @@
 <?php
+use FileExport\Smarty\Smarty;
 /**
  * Smarty Internal Plugin
  *
@@ -355,7 +356,7 @@ class Smarty_Template_Cached
         //
         //    check if cache is valid
         //
-        if (!($_template->caching == Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == Smarty::CACHING_LIFETIME_SAVED) || $_template->source->recompiled) {
+        if (!($_template->caching == FileExport\Smarty\Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == FileExport\Smarty\Smarty::CACHING_LIFETIME_SAVED) || $_template->source->recompiled) {
             $handler->populate($this, $_template);
 
             return;
@@ -368,7 +369,7 @@ class Smarty_Template_Cached
                 } else {
                     $this->valid = true;
                 }
-                if ($this->valid && $_template->caching == Smarty::CACHING_LIFETIME_CURRENT && $_template->cache_lifetime >= 0 && time() > ($this->timestamp + $_template->cache_lifetime)) {
+                if ($this->valid && $_template->caching == FileExport\Smarty\Smarty::CACHING_LIFETIME_CURRENT && $_template->cache_lifetime >= 0 && time() > ($this->timestamp + $_template->cache_lifetime)) {
                     // lifetime expired
                     $this->valid = false;
                 }
@@ -400,7 +401,7 @@ class Smarty_Template_Cached
             } else {
                 return;
             }
-            if ($this->valid && $_template->caching === Smarty::CACHING_LIFETIME_SAVED && $_template->properties['cache_lifetime'] >= 0 && (time() > ($_template->cached->timestamp + $_template->properties['cache_lifetime']))) {
+            if ($this->valid && $_template->caching === FileExport\Smarty\Smarty::CACHING_LIFETIME_SAVED && $_template->properties['cache_lifetime'] >= 0 && (time() > ($_template->cached->timestamp + $_template->properties['cache_lifetime']))) {
                 $this->valid = false;
             }
             if (!$this->valid && $_template->smarty->cache_locking) {
