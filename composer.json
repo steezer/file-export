@@ -1,0 +1,22 @@
+{
+    "name": "steezer/file-export",
+    "description": "The file export library",
+    "keywords": ["PHPUnit", "slow", "profile"],
+    "homepage": "https://github.com/steezer/file-export",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "XieChunping",
+            "email": "spring.wind2006@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "FileExport\\": "src/"
+        }
+    }
+}
